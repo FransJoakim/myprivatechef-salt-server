@@ -6,8 +6,8 @@ const dbName = 'myprivatechef';
 console.log(process.env.DB_PASSWORD)
 const mongoConnection = client => {
     const db = client.db(dbName);
-    db.on('close', () => { console.log('close connection'); });
-    db.on('reconnect', () => { console.log('reconnected'); });
+    //db.on('close', () => { console.log('close connection'); });
+    //db.on('reconnect', () => { console.log('reconnected'); });
     const chefCollection = db.collection('chefs');
     return chefCollection;
   };
@@ -18,11 +18,11 @@ const mongoConnection = client => {
   
     try {
       const chefCollection = mongoConnection(client);
-      const result = await chefCollection.find();
+      const result = await chefCollection.findOne({"name":"Ibere"});
       console.log(result)
       return result
     } catch (err) {
-      throw new Error(err);
+      console.log(err);
     } finally {
       client.close();
     }
