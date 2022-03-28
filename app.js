@@ -1,7 +1,8 @@
 const express = require('express');
-const app = express();
-var cors = require('cors');
 const { createNewCart }  =  require('./chefDatabase/db')
+const app = express();
+const cors = require('cors');
+
 app.use(express.json());
 app.use(cors());
 
