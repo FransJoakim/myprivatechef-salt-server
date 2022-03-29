@@ -10,13 +10,13 @@ const mongoConnection = client => {
   return chefCollection;
 };
 
-const createNewCart = async () => {
+const getAllChefsFromDB = async () => {
   const client = await MongoClient
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
 
   try {
     const chefCollection = mongoConnection(client);
-    const result = await chefCollection.findOne({ "name": "Ibere" });
+    const result = await chefCollection.find().toArray();
     console.log(result)
     return result
   } catch (err) {
@@ -26,4 +26,4 @@ const createNewCart = async () => {
   }
 };
 
-module.exports.createNewCart = createNewCart
+module.exports.getAllChefsFromDB = getAllChefsFromDB
