@@ -7,7 +7,8 @@ app.use(express.json());
 app.use(cors());
 
 app.get('/chefs', async (req, res) => {
-  const result = await getAllChefs()
+  const result = await getAllChefs();
+  console.log(result);
   res.json(result);
 });
 
