@@ -22,6 +22,7 @@ const getAllChefsFromDB = async () => {
         id: chef._id,
         name: chef.name,
         description: chef.description,
+        image: chef.pictures
       }
     })
     return chef
