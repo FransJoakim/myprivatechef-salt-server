@@ -22,7 +22,7 @@ const getAllChefsFromDB = async () => {
         id: chef._id,
         name: chef.name,
         description: chef.description,
-        image: chef.pictures
+        image: chef.profileImage
       }
     })
     return chef
