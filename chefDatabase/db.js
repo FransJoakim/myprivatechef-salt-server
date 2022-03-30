@@ -17,15 +17,15 @@ const getAllChefsFromDB = async () => {
   try {
     const chefCollection = mongoConnection(client);
     const result = await chefCollection.find().toArray();
-    const chef = result.map(chef => {
-      return {
-        id: chef._id,
-        name: chef.name,
-        description: chef.description,
-        image: chef.profileImage
-      }
-    })
-    return chef
+    // const chef = result.map(chef => {
+    //   return {
+    //     id: chef._id,
+    //     name: chef.name,
+    //     description: chef.description,
+    //     image: chef.profileImage
+    //   }
+    // })
+    return result
   } catch (err) {
     console.log(err);
   } finally {
