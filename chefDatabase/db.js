@@ -17,14 +17,6 @@ const getAllChefsFromDB = async () => {
   try {
     const chefCollection = mongoConnection(client);
     const result = await chefCollection.find().toArray();
-    // const chef = result.map(chef => {
-    //   return {
-    //     id: chef._id,
-    //     name: chef.name,
-    //     description: chef.description,
-    //     image: chef.profileImage
-    //   }
-    // })
     return result
   } catch (err) {
     console.log(err);
@@ -33,4 +25,25 @@ const getAllChefsFromDB = async () => {
   }
 };
 
-module.exports.getAllChefsFromDB = getAllChefsFromDB
+const saveBookedDateToDB = async (name, date) => {
+  const client = await MongoClient
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+  try {
+    const chefCollection = mongoConnection(client);
+    const result = await chefCollection.updateOne(
+      {name:name},
+      {$push: {bookedDates: date}}
+    );
+    console.log(result)
+  } catch (err) {
+    console.log(err);
+  } finally {
+    client.close();
+  }
+};
+
+module.exports = {
+  getAllChefsFromDB,
+  saveBookedDateToDB
+}
