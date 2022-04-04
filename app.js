@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllChefs }  =  require('./chefDatabase')
+const { getAllChefs, saveBookedDateToChef }  =  require('./chefDatabase')
 const app = express();
 const cors = require('cors');
 
@@ -13,8 +13,15 @@ app.get('/', async (req, res) => {
 
 app.get('/chefs', async (req, res) => {
   const result = await getAllChefs();
-  console.log(result);
   res.json(result);
 });
+
+app.post('/chefs/:name', async (req, res)=> {
+  const name = req.params.name
+  const date = req.body.selectedDate
+  console.log(date)
+  const result = await saveBookedDateToChef(name, date);
+})
+ 
 
 module.exports.app = app;
