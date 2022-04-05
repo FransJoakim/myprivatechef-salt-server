@@ -12,7 +12,7 @@ app.get('/', async (req, res) => {
   res.end();
 });
 
-app.get('/chefs', async (req, res) => {
+app.get('/api/chefs', async (req, res) => {
   const result = await getAllChefs();
   res.json(result);
 });
