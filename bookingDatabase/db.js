@@ -32,6 +32,23 @@ const addBookingToDB = async (data) => {
     }
 };
 
+const getAllBookingsForUser = async (user) => {
+    const client = await MongoClient
+        .connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+
+    try {
+        const bookingCollection = mongoConnection(client);
+        const result = await bookingCollection.find({user}).toArray();
+        console.log(result)
+        return result
+    } catch (err) {
+        console.log(err);
+    } finally {
+        client.close();
+    }
+};
+
 module.exports = {
     addBookingToDB,
+    getAllBookingsForUser
 }
