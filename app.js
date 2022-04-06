@@ -3,6 +3,7 @@ const { getAllChefs, saveBookedDateToChef } = require('./chefDatabase')
 const { postNewBooking, getUserBookings } = require('./bookingDatabase')
 const app = express();
 const cors = require('cors');
+const {sendMail} = require('./emailService')
 
 app.use(express.json());
 app.use(cors());
@@ -23,8 +24,11 @@ app.get('/api/users/:username', async (req, res) => {
 })
 
 app.post('/api/booking', async (req, res) => {
+  console.log(req.body);
   const dateReservation = await saveBookedDateToChef(req.body.name, req.body.date);
   const bookingConfirmation = await postNewBooking(req.body)
+  await sendMail(req.body.user,req.body.totalPrice,req.body.chef,req.body.totalhours,req.body.date);
+  res.json("order confirmed")
 })
 
 
