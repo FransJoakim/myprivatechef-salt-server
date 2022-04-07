@@ -23,9 +23,7 @@ app.get('/api/users/:username', async (req, res) => {
   res.json(result);
 })
 
-app.post('/api/booking', async (req, res) => {
-  console.log(req.body);
- 
+app.post('/api/booking', async (req, res) => { 
   const dateReservation = await saveBookedDateToChef(req.body.name, req.body.date);
   const bookingConfirmation = await postNewBooking(req.body)
   await sendMail(req.body.user,req.body.totalPrice,req.body.chef,req.body.totalhours,req.body.date, req.body.shoppingList);
