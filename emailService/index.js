@@ -18,7 +18,7 @@ const sendMail = (user, totalPrice, chef, totalMinutes, date, shoppingList) => {
         return `<li>${li.name} ${li.quantity} ${li.unit}</li>`;
     });
 
-    let confirmationMessage = `Hello ${user}, <br><br>
+    let confirmationMessage = `Hello! <br><br>
         Your order is confirmed!<br> 
         The chef ${chef} is booked for ${convertMinToHr(totalMinutes)} at ${date}.<br>
         Total price: ${totalPrice} SEK.<br>
@@ -30,7 +30,7 @@ const sendMail = (user, totalPrice, chef, totalMinutes, date, shoppingList) => {
 
     const options = {
         from: 'myprivatechefapp@gmail.com',
-        to: 'sumana.sattar@gmail.com, barbarakogus@gmail.com',
+        to: `${user}`,
         subject: 'Order confirmation',
         text: 'My private Chef',
         html: confirmationMessage,
